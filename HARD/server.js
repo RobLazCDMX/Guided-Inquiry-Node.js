@@ -2,7 +2,7 @@ const express = require('express')
 
 const app = express() // this allows me to use the express framework 
 
-let data = require('./public/database.json')// gives me access to my database
+let data = require('./Data/database.json')// gives me access to my database
 
 
 // app.get('/workers', (req, res) => { // Parameters: req = request to user res = response to user
@@ -18,19 +18,14 @@ app.get('/employees', (req, res) => {
 
 
 app.get('/employees/:id', (req, res) =>{
-    const findEmployee = data.workers.find((employee) => {
+    const findEmployee = data.employees.find((employee) => {
         return parseInt(req.params.id) === employee.id //parseInt converts the string into integer
     })
 
 
 
-
-
-
-
-
     if(!findEmployee){
-        res.status(404).send('Could not find information')
+        res.status(404).send('Employee was not found')
     }
     res.send(findEmployee)
 })
